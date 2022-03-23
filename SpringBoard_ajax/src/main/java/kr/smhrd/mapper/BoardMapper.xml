@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.smhrd.mapper.BoardMapper">
+
+	<select id="boardList" resultType="kr.smhrd.domain.Board">
+		select * from springboard
+	</select>
+	
+	<insert id="boardInsert" parameterType="kr.smhrd.domain.Board">
+		INSERT INTO springboard(idx,title,content,WRITER)
+		VALUES(sboard_seq.nextval,#{title},#{content},#{writer})
+	</insert>
+	
+	<select id="boardContent" parameterType="int" resultType="kr.smhrd.domain.Board">
+		SELECT idx, title, content, writer
+		FROM springboard
+		WHERE idx =#{idx}
+	</select>
+	
+	<update id="boardUpdatePost" parameterType="kr.smhrd.domain.Board">
+		UPDATE springboard
+		SET title=#{title}, content=#{content}
+		WHERE idx=#{idx}
+	</update>
+	
+</mapper>
+

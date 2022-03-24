@@ -17,9 +17,9 @@
   <h2>게시판 만들기 복습!!</h2>
   <div class="panel panel-default">
     <div class="panel-heading">Panel Heading</div>
-    <div class="panel-body" id="list">
+    <div class="panel-body" id="list" style="display:block"></div>
     <div class="panel-body" id="wform" style="display:none" >
-     <form class="form-horizontal" action="/myapp/boardInsert.do" method="post">
+     <form class="form-horizontal" id= "frm">
     <div class="form-group">
       <label class="control-label col-sm-2" for="title">제목 :</label>
       <div class="col-sm-10">
@@ -40,13 +40,11 @@
     </div>
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-success btn-sm">등록</button>
+        <button type="submit" class="btn btn-success btn-sm" onclick="goInsert()">등록</button>
         <button type="reset" class="btn btn-success btn-sm">취소</button>
       </div>
     </div>
   </form>
-</div>
-<button type="button" class="btn btn-success btn-sm" onclick="display()">글쓰기</button>
 </div>
     <div class="panel-footer">스인개 체고!!</div>
   </div>
@@ -81,16 +79,32 @@ function htmlView(data){ // 통신 성공 시 실행
 		result += "<td>"+vo.indate+"</td>";
 		result += "<td>"+vo.count+"</td></tr>";
 	})
+	result +="<tr><td colspan='5'><button class='btn btn-success btn-sm' onclick='goView()'>글쓰기</button></td></tr>";
 	result += "</table>"
+		
 	$("#list").html(result)
 }
 
-function display(){
+function goView(){
 	if($("#wform").css("display")=="none"){
-		$("#wform").css("display","block")
+		$("#wform").slideDown();
 	}else{
-		$("#wform").css("display","none")
+		$("#wform").slideUp();
 	}
 }
+
+function goInsert(){
+	var fdata = $("#frm").serialize()
+	$.ajax({
+		url : "/myapp1/boardInsert.do",
+		type : "post",
+		data : fdata,
+		success : loadList,
+		error : function(){
+			alert("error")
+		}
+	})
+}
+
 </script>
 </html>

@@ -16,4 +16,6 @@ public interface BoardMapper {
 	
 	//게시물 수정
 	public void boardUpdatePost(Board vo);
+	
+	//게시물 삭제
 }

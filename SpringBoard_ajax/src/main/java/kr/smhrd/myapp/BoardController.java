@@ -4,11 +4,8 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.smhrd.domain.Board;
 import kr.smhrd.mapper.BoardMapper;
@@ -20,8 +17,21 @@ public class BoardController {
 	@Autowired
 	private BoardMapper mapper;
 	
+	@RequestMapping("/")
+	public String main() {
+		return "boardList";
+	}
 	
+	@RequestMapping("/boardList.do")
+	public @ResponseBody ArrayList<Board> boardList(){
+		ArrayList<Board> list = mapper.boardList();
+		return list;
+	}
 	
+	@RequestMapping("/boardInsert.do")
+	public @ResponseBody void boardInsert(Board vo) {
+		mapper.boardInsert(vo);
+	}
 	
 
 	

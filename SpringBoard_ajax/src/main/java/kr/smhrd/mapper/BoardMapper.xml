@@ -23,5 +23,9 @@
 		WHERE idx=#{idx}
 	</update>
 	
+ 	<delete id="boardDelete" parameterType="int">
+ 		DELETE FROM springboard
+ 		WHERE idx= #{idx}
+	</delete>
 </mapper>
 

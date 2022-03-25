@@ -77,7 +77,8 @@ function htmlView(data){ // 통신 성공 시 실행
 		result += "<td>"+vo.title+"</td>";
 		result += "<td>"+vo.writer+"</td>";
 		result += "<td>"+vo.indate+"</td>";
-		result += "<td>"+vo.count+"</td></tr>";
+		result += "<td>"+vo.count+"</td>";
+		result += "<td><button class='btn btn-success btn-sm' onclick='goDel("+vo.idx+")'>삭제</button></td></tr>"
 	})
 	result +="<tr><td colspan='5'><button class='btn btn-success btn-sm' onclick='goView()'>글쓰기</button></td></tr>";
 	result += "</table>"
@@ -104,7 +105,23 @@ function goInsert(){
 			alert("error")
 		}
 	})
+	$("#title").val("")
+	$("#content").val("")
+	$("#writer").val("")
+	$("#init").trigger("click")
+	$("#wform").css("display","none")
 }
-
+ 
+function goDel(idx){
+	$.ajax({
+		url : "/myapp1/boardDelete.do",
+		type : "get",
+		data : {"idx" : idx},
+		success : loadList,
+		error : function(){
+			alert("error")
+		}
+	})
+}
 </script>
 </html>

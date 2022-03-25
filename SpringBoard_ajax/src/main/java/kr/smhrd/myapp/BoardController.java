@@ -33,6 +33,11 @@ public class BoardController {
 		mapper.boardInsert(vo);
 	}
 	
+	@RequestMapping("/boardDelete.do")
+	public @ResponseBody void boardDelete(int idx) {
+		mapper.boardDelete(idx);
+	}
+	
 
 	
 	

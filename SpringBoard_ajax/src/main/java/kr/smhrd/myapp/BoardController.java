@@ -38,6 +38,10 @@ public class BoardController {
 		mapper.boardDelete(idx);
 	}
 	
+	@RequestMapping("/boardUpdate2.do")
+	public @ResponseBody void boardUpdate2(Board vo) {
+		mapper.boardUpdate2(vo);
+	}
 
 	
 	

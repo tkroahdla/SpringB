@@ -19,4 +19,6 @@ public interface BoardMapper {
 	
 	//게시물 삭제
 	public void boardDelete(int idx);
+	
+	public void boardUpdate2(Board vo);
 }

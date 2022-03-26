@@ -74,10 +74,11 @@ function htmlView(data){ // 통신 성공 시 실행
 	$.each(data, (index,vo)=>{
 		result += "<tr>";
 		result += "<td>"+vo.idx+"</td>";
-		result += "<td>"+vo.title+"</td>";
-		result += "<td>"+vo.writer+"</td>";
+		result += "<td id='t"+vo.idx+"'>"+vo.title+"</td>";
+		result += "<td id='w"+vo.idx+"'>"+vo.writer+"</td>";
 		result += "<td>"+vo.indate+"</td>";
 		result += "<td>"+vo.count+"</td>";
+		result += "<td id='u"+vo.idx+"'><button class='btn btn-warning btn-sm' onclick='goUpdate1("+vo.idx+")'>수정</button></td>"
 		result += "<td><button class='btn btn-success btn-sm' onclick='goDel("+vo.idx+")'>삭제</button></td></tr>"
 	})
 	result +="<tr><td colspan='5'><button class='btn btn-success btn-sm' onclick='goView()'>글쓰기</button></td></tr>";
@@ -110,6 +111,37 @@ function goInsert(){
 	$("#writer").val("")
 	$("#init").trigger("click")
 	$("#wform").css("display","none")
+}
+
+function goUpdate1(idx){
+	var title = $("#t"+idx).text()
+	var tInput = "<input id='utitle"+idx+"' type='textarea' class='form-control' value='"+title+"' >"
+	$("#t"+idx).html(tInput)
+	
+	var writer = $("#w"+idx).text()
+	var wInput = "<input id='uwriter"+idx+"' type='textarea' class='form-control' value='"+writer+"'>"
+	$("#w"+idx).html(wInput)
+	
+	var nbtn = "<button class='btn btn-info btn-sm' onclick='goUpdate2("+idx+")'>수정하기</button>"
+	$("#u"+idx).html(nbtn)
+}
+
+function goUpdate2(idx){
+	var title = $("#utitle"+idx).val()
+	var writer = $("#uwriter"+idx).val()
+	
+	$.ajax({
+		url : "/myapp1/boardUpdate2.do",
+		type : "post",
+		data : {"idx" : idx,
+				"title": title,
+				"writer": writer
+				},
+		success : loadList,
+		error : function(){
+			alert("error")
+		}
+	})
 }
  
 function goDel(idx){

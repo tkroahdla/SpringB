@@ -27,5 +27,11 @@
  		DELETE FROM springboard
  		WHERE idx= #{idx}
 	</delete>
+	
+	<update id="boardUpdate2" parameterType="kr.smhrd.domain.Board">
+		UPDATE springboard
+		SET title=#{title}, writer=#{writer}
+		WHERE idx=#{idx}
+	</update>
 </mapper>
 
